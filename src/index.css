@@ -13,6 +13,11 @@ html {
 :root {
     --AzulPrincipal: #00264C;
     --AzulSecundario: #26609b;
+    --AzulSecundarioT: #26619b7e;
     --BlancoPrincipal: #C9BBCA;
     --BlancoSecundario: #cecece;
+    --BlancoV2: #ffffff;
+    --MoradoPrincipal: #8578F6;
+    --NaranjaPrincipal: #FE9B66;
+    --RojoPrincipal: #CC0001;
 }

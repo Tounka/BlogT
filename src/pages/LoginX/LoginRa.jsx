@@ -1,5 +1,6 @@
 import { LoginUx } from "./LoginUx";
-import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "firebase/auth";
+
 import { auth } from '../../firebase';
 import { useState } from 'react';
 
@@ -27,6 +28,7 @@ export const LoginRa = ({setBoolSwitchLoginRegister }) =>{
     const onSubmit = async (values, { setSubmitting }) => {
         setSubmitting(false);
         try {
+        await setPersistence(auth, browserLocalPersistence);
           await signInWithEmailAndPassword(auth, values.email, values.password);
           // Redirigir o hacer algo después del inicio de sesión
           console.log("Inicio de sesión exitoso");
@@ -43,6 +45,7 @@ export const LoginRa = ({setBoolSwitchLoginRegister }) =>{
       const signInWithGoogle = async () => {
         const provider = new GoogleAuthProvider();
         try {
+            await setPersistence(auth, browserLocalPersistence);
           const result = await signInWithPopup(auth, provider);
           // El usuario ha iniciado sesión exitosamente
           console.log("Inicio de sesión con Google exitoso", result.user);
