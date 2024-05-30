@@ -2,7 +2,7 @@
 import styled from 'styled-components'
 import { CiUser } from "react-icons/ci";
 import { FcGoogle } from "react-icons/fc";
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import {  Field, ErrorMessage } from 'formik';
 
 export const DispayPrincipal = styled.div`
     height: 100%;

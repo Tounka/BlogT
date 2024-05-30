@@ -16,7 +16,7 @@ export const ContenedorFormularioPost = styled(Form)`
     align-items:center;
     gap:10px;
     position:relative;
-    margin: 50px 0;
+    margin: 50px 0  100px 0;
     overflow: visible;
 `;
 
@@ -94,19 +94,30 @@ const FieldFileStyled = styled(FieldStyled)`
     }
 `;
 
-const InputFile = ({ name }) => {
+const InputFile = ({ name, onChange }) => {
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        onChange(name, file);
+    };
+
     return (
         <FieldFileStyled
             type="file"
             name={name}
-            accept="image/*" 
+            accept="image/*"
+            onChange={handleFileChange}
         />
     );
 };
 
-export const InputFormulario = ({ type, name, txt }) => {
+export const InputFormulario = ({ type, name, txt, FnOnchange, titular }) => {
+    const handleInputChange = (event) => {
+        const value = event.target.value;
+        FnOnchange(event); // Here, passing the full event so that FnOnchange can extract the value
+    };
+
     return (
-        <FieldStyled type={type} name={name} placeholder={txt} />
+        <FieldStyled type={type} name={name} placeholder={txt} value={titular} onChange={handleInputChange} />
     );
 };
 
@@ -146,25 +157,34 @@ const StyledTextArea = styled.textarea`
   resize: vertical;
 `;
 
-export const SeccionTextareaFormulario = ({ nam, descripcion, txt, txt2, img1, img2}) => {
-    const numeroSecc = nam[nam.length - 1]
+export const SeccionTextareaFormulario = ({  txt, txt2, handleChange, secciones, id }) => {
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        handleChange(name, value);
+    };
+
+    const handleFileChange = (name, file) => {
+        handleChange(name, file);
+    };
 
     return (
         <>
-            <TituloSeccion>{'Seccion ' + numeroSecc}</TituloSeccion>
-            <FieldStyled type="input" name={nam} placeholder={txt} />
+            <TituloSeccion>{'Seccion ' + (id+1) }</TituloSeccion>
+            <FieldStyled type="input" name={'titulo'} placeholder={txt} onChange={handleInputChange} />
             <Field
                 as={FieldTextAreaStyled}
-                name={descripcion}
+                name={'descripcion'}
                 placeholder={txt2}
+                onChange={handleInputChange}
             />
             <ContenedorInputImg>
-                <InputFile name={img1} />
-                <InputFile name={img2} />
+                <InputFile name={'img1'} onChange={handleFileChange} />
+                <InputFile name={'img2'} onChange={handleFileChange} />
             </ContenedorInputImg>
         </>
     );
 };
+
 
 
 export const BtnOnSubmitStyled = styled.button`

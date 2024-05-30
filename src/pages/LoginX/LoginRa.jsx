@@ -1,5 +1,5 @@
 import { LoginUx } from "./LoginUx";
-import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "firebase/auth";
+import {  signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "firebase/auth";
 
 import { auth } from '../../firebase';
 import { useState } from 'react';

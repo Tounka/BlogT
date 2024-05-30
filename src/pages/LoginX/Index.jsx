@@ -3,7 +3,7 @@ import { LoginRa } from "./LoginRa";
 import { RegisterRa } from "./RegisterRa";
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {  onAuthStateChanged } from "firebase/auth";
 import { auth } from '../../firebase';
 
 export const Login = () => {
