@@ -9,12 +9,12 @@ const ContenedorPadreMenu =  styled.div`
     height: 80px;
     width:100%;
     background-color: var(--BlancoPrincipal);
-    display: flex;
+    display: ${props => props.displayNone ? 'none' : 'flex'};
     justify-content: space-between;
     position:fixed;
     top: 0;
     left: 0;
-    
+    z-index: 100000;
     -webkit-box-shadow: 0px 5px 17px 0px rgba(0,0,0,0.58);
     -moz-box-shadow: 0px 5px 17px 0px rgba(0,0,0,0.58);
     box-shadow: 0px 5px 17px 0px rgba(0,0,0,0.58);
@@ -30,7 +30,7 @@ const ContenedorSeccionesMenu = styled.div`
 `
 
 
-export const Menu = () =>{
+export const Menu = ({displayNone}) =>{
 
     const navigate = useNavigate();
     const FnLogOut = async() =>{
@@ -46,11 +46,14 @@ export const Menu = () =>{
     const FnNombre = () =>{
         navigate('/Inicio');
     }
+    const FnPost = () =>{
+        navigate('/Post');
+    }
     const FnRedirect = ()=>{
         navigate('/CrearPost');
     }
     return(
-        <ContenedorPadreMenu>
+        <ContenedorPadreMenu displayNone={displayNone}>
             {/* Izquierda */}
             <ContenedorSeccionesMenu>
                 <BtnMenu handleClick={FnNombre} txt={'BlogT'} />
@@ -59,7 +62,7 @@ export const Menu = () =>{
             <ContenedorSeccionesMenu>
                 <BtnMenu handleClick={FnNombre} txt={'Perfil'}  sty={'textoPeque'}/>
                 <BtnMenu handleClick={FnRedirect} txt={'Crear Post'} sty={'textoPeque'}/>
-                <BtnMenu handleClick={FnNombre} txt={'Mis Post'} sty={'textoPeque'}/>
+                <BtnMenu handleClick={FnPost} txt={'Mis Post'} sty={'textoPeque'}/>
             </ContenedorSeccionesMenu>
             {/* Derecha */}
             <ContenedorSeccionesMenu>

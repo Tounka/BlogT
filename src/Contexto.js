@@ -28,6 +28,15 @@ export const DatosContextProvider = ({ children }) => {
           },
           {
             titulo: "Transforma tu Hogar: Ideas Creativas para una Decoración Económica",
+            descripcion: "¿Quieres darle un nuevo aire a tu hogar sin gastar una fortuna? En este post, compartimos ideas innovadoras y asequibles para renovar la decoración de tu casa. Aprende a reutilizar objetos, hacer manualidades y aprovechar ofertas para crear un ambiente acogedor y estilizado. Con estos consejos, tu hogar lucirá espectacular sin romper el banco. ¡Inspírate y empieza hoy mismo!"
+          },
+          {
+            titulo: "Transforma tu Hogar: Ideas Creativas para una Decoración Económica",
+            descripcion: "¿Quieres darle un nuevo aire a tu hogar sin gastar una fortuna? En este post, compartimos ideas innovadoras y asequibles para renovar la decoración de tu casa. Aprende a reutilizar objetos, hacer manualidades y aprovechar ofertas para crear un ambiente acogedor y estilizado. Con estos consejos, tu hogar lucirá espectacular sin romper el banco. ¡Inspírate y empieza hoy mismo!",
+            img1: 'https://imgix.cosentino.com/es/wp-content/uploads/2023/07/Lumire-70-Facade-MtWaverley-vic-1.jpg?auto=format%2Ccompress&ixlib=php-3.3.0'
+          },
+          {
+            titulo: "Transforma tu Hogar: Ideas Creativas para una Decoración Económica",
             descripcion: "¿Quieres darle un nuevo aire a tu hogar sin gastar una fortuna? En este post, compartimos ideas innovadoras y asequibles para renovar la decoración de tu casa. Aprende a reutilizar objetos, hacer manualidades y aprovechar ofertas para crear un ambiente acogedor y estilizado. Con estos consejos, tu hogar lucirá espectacular sin romper el banco. ¡Inspírate y empieza hoy mismo!",
             img1: 'https://imgix.cosentino.com/es/wp-content/uploads/2023/07/Lumire-70-Facade-MtWaverley-vic-1.jpg?auto=format%2Ccompress&ixlib=php-3.3.0'
           }

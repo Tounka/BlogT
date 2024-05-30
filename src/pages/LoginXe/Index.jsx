@@ -23,7 +23,7 @@ export const Login = () => {
     }, [navigate]);
 
     return (
-        <DispayPrincipal>
+        <DispayPrincipal displayNone={true}>
             {boolSwitchLoginRegister
             ? <RegisterRa  setBoolSwitchLoginRegister={setBoolSwitchLoginRegister}/>
             : <LoginRa setBoolSwitchLoginRegister={setBoolSwitchLoginRegister} />

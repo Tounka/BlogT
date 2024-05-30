@@ -1,4 +1,4 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import {  Form, Field } from 'formik';
 import { useEffect, useState } from 'react';
 import { FaPlus } from "react-icons/fa";
 import styled from "styled-components";
@@ -14,9 +14,10 @@ export const ContenedorFormularioPost = styled(Form)`
     display:flex;
     flex-direction:column;
     align-items:center;
+   
     gap:10px;
     position:relative;
-    margin: 50px 0  100px 0;
+    margin: 0 0  100px 0;
     overflow: visible;
 `;
 
@@ -112,7 +113,6 @@ const InputFile = ({ name, onChange }) => {
 
 export const InputFormulario = ({ type, name, txt, FnOnchange, titular }) => {
     const handleInputChange = (event) => {
-        const value = event.target.value;
         FnOnchange(event); // Here, passing the full event so that FnOnchange can extract the value
     };
 
@@ -148,14 +148,7 @@ const TituloSeccion = styled.h2`
     text-align: center;
     color: var(--BlancoV2);
 `;
-const StyledTextArea = styled.textarea`
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-`;
+
 
 export const SeccionTextareaFormulario = ({  txt, txt2, handleChange, secciones, id }) => {
     const handleInputChange = (e) => {
