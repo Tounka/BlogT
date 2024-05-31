@@ -1,4 +1,4 @@
-
+// CreadorPostUx.jsx
 import { ContenedorFormularioPost, LabelStyled, InputFormulario, SeccionTextareaFormulario, BtnAgregarInput, BtnOnSubmit, MensajeError } from './ComponentesCreadorPost.jsx';
 
 export const CreadorPostUx = ({ secciones, agregarSeccion, errores, handleChange, FnTitular, titular }) => {

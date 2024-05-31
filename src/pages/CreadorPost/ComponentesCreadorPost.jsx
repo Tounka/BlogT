@@ -1,7 +1,9 @@
-import {  Form, Field } from 'formik';
+// ComponentesCreadorPost.jsx
+import { Form, Field } from 'formik';
 import { useEffect, useState } from 'react';
 import { FaPlus } from "react-icons/fa";
 import styled from "styled-components";
+
 
 export const ContenedorFormularioPost = styled(Form)`
     background-color: var(--MoradoPrincipal);
@@ -14,7 +16,6 @@ export const ContenedorFormularioPost = styled(Form)`
     display:flex;
     flex-direction:column;
     align-items:center;
-   
     gap:10px;
     position:relative;
     margin: 0 0  100px 0;
@@ -45,15 +46,15 @@ const FieldStyled = styled(Field)`
 `;
 
 const FieldTextAreaStyled = styled.textarea`
-  padding-left: 10px;
+    padding-left: 10px;
     border-radius: 10px;
     background-color: var(--BlancoV2);
     height: 120px;
     width:100%;
-    resize: vertical; /* Permitir redimensionar verticalmente */
-    overflow-y: auto; /* Añadir barra de desplazamiento vertical si es necesario */
-    white-space: pre-wrap; /* Mantener los saltos de línea y ajustar el texto automáticamente */
-    word-wrap: break-word; /* Ajustar las palabras largas para que se ajusten al ancho del área */
+    resize: vertical;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 
     &::placeholder {
         color: var(--AzulPrincipal);
@@ -74,7 +75,7 @@ const FieldFileStyled = styled(FieldStyled)`
 
     &::-webkit-file-upload-button {
         background-color: var(--BlancoV2);
-        color: var(--AzulPrincipal);
+        color: var (--AzulPrincipal);
         border: none;
         height:100%;
         width: 50%;
@@ -131,15 +132,15 @@ const BtnAgregarInputStyled = styled.div`
     background-color: var(--BlancoSecundario);
     border-radius:10px;
     cursor: pointer;
-` 
+`;
+
 export const BtnAgregarInput = ({ FnAgregar }) => {
     return (
         <BtnAgregarInputStyled onClick={FnAgregar}>
             <FaPlus />
         </BtnAgregarInputStyled>
-    )
-}
-
+    );
+};
 
 const TituloSeccion = styled.h2`
     color: var(--AzulPrincipal);
@@ -149,8 +150,7 @@ const TituloSeccion = styled.h2`
     color: var(--BlancoV2);
 `;
 
-
-export const SeccionTextareaFormulario = ({  txt, txt2, handleChange, secciones, id }) => {
+export const SeccionTextareaFormulario = ({ txt, txt2, handleChange, id }) => {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         handleChange(name, value);
@@ -178,8 +178,6 @@ export const SeccionTextareaFormulario = ({  txt, txt2, handleChange, secciones,
     );
 };
 
-
-
 export const BtnOnSubmitStyled = styled.button`
     width: 100%;
     height: 100px;
@@ -200,16 +198,15 @@ export const BtnOnSubmitStyled = styled.button`
     z-index: -1;
     color: var(--BlancoV2);
     user-select: none;
-`
+`;
 
-export const BtnOnSubmit = () =>{
+export const BtnOnSubmit = () => {
     return(
         <BtnOnSubmitStyled type='submit'>
             Enviar Post
         </BtnOnSubmitStyled>
-    )
-}
-
+    );
+};
 
 const MensajeErrorStyled = styled.div`
     color: var(--NaranjaPrincipal);
@@ -224,23 +221,21 @@ const MensajeErrorStyled = styled.div`
     display:flex;
     justify-content: center;
     align-items:center;
-    
 
     animation-name: vibrar;
-    animation-duration: 1s; 
-    animation-iteration-count: 1; 
-    animation-timing-function: ease-in-out; 
-  @keyframes vibrar {
-    0% { transform: translate(-10px, -4px); opacity: 0; }
-  10% { opacity: 1; }
-  25% { transform: translate(10px, -2px); }
-  50% { transform: translate(-10px, 0px); }
-  75% { transform: translate(10px, ); }
-  100% { transform: translate(0px, 0px); opacity: 1;}
-}
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
 
-`
-
+    @keyframes vibrar {
+        0% { transform: translate(-10px, -4px); opacity: 0; }
+        10% { opacity: 1; }
+        25% { transform: translate(10px, -2px); }
+        50% { transform: translate(-10px, 0px); }
+        75% { transform: translate(10px, ); }
+        100% { transform: translate(0px, 0px); opacity: 1;}
+    }
+`;
 
 export const MensajeError = ({ errores }) => {
     const [error, setError] = useState([]);
@@ -260,4 +255,3 @@ export const MensajeError = ({ errores }) => {
         </>
     );
 };
-
