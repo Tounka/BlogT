@@ -24,12 +24,18 @@ export const CreadorPost = () => {
     };
 
     useEffect(() => {
-        setDatos({
-            titulo: titular,
-            owner: usuario.uid,
-            secciones: seccionesValues,
-        });
-    }, [titular, usuario.uid, seccionesValues]);
+        if (usuario) { // Verifica si el usuario está cargado
+            setDatos({
+                titulo: titular,
+                owner: {
+                    userId: usuario.uid,
+                    userName: usuario.providerData[0].displayName,
+                    userImg: usuario.providerData[0].photoURL,
+                    fechaDeCreacion: new Date() 
+                },secciones: seccionesValues,
+            });
+        }
+    }, [titular, usuario, seccionesValues]);
 
     const handleChange = (index, field, value) => {
         const newSeccionesValues = [...seccionesValues];
@@ -45,6 +51,12 @@ export const CreadorPost = () => {
 
     const handleSubmit = async (values) => {
         try {
+            // Verifica si el usuario está cargado antes de continuar
+            if (!usuario) {
+                console.error("El usuario no está cargado.");
+                return;
+            }
+
             const updatedSeccionesValues = await Promise.all(
                 seccionesValues.map(async (seccion) => {
                     const updatedSeccion = { ...seccion };
@@ -85,7 +97,6 @@ export const CreadorPost = () => {
         } catch (error) {
             console.error("Error al guardar el documento: ", error);
         }
-        console.log(datos);
     };
     
     const FnTitular = (event) => {

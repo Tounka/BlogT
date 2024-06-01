@@ -1,5 +1,6 @@
 import { Titulo } from "../componentes/ComponentesPrincipales";
 import { Seccion } from "../componentes/ComponenteSeccion";
+import { FooterPost } from "../componentes/ComponentesPrincipales";
 export const Template = ({data}) =>{
     const owner = data.owner;
     const tituloPrincipal = data.titulo;
@@ -14,7 +15,7 @@ export const Template = ({data}) =>{
             )
 
             )}
-
+            <FooterPost nombre={owner.userName} img={owner.userImg} fechaDeCreacion={owner.fechaDeCreacion}/>
             <h1>{owner}</h1>
             
 

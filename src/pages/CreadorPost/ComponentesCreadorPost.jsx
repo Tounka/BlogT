@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { FaPlus } from "react-icons/fa";
 import styled from "styled-components";
 
-
 export const ContenedorFormularioPost = styled(Form)`
     background-color: var(--MoradoPrincipal);
     height:auto;

@@ -1,5 +1,5 @@
 // CreadorPostUx.jsx
-import { ContenedorFormularioPost, LabelStyled, InputFormulario, SeccionTextareaFormulario, BtnAgregarInput, BtnOnSubmit, MensajeError } from './ComponentesCreadorPost.jsx';
+import { ContenedorFormularioPost, LabelStyled, InputFormulario, SeccionTextareaFormulario, BtnAgregarInput, BtnOnSubmit, MensajeError} from './ComponentesCreadorPost.jsx';
 
 export const CreadorPostUx = ({ secciones, agregarSeccion, errores, handleChange, FnTitular, titular }) => {
     return (
@@ -16,6 +16,7 @@ export const CreadorPostUx = ({ secciones, agregarSeccion, errores, handleChange
                     handleChange={(field, value) => handleChange(index, field, value)}
                 />
             ))}
+            
             <BtnAgregarInput FnAgregar={agregarSeccion} />
             <MensajeError errores={errores} />
             <BtnOnSubmit />
