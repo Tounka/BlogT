@@ -92,6 +92,8 @@ const ImageComponent2 = ({ src, alt }) => {
 export const Seccion = ({ data, index }) => {
     const { titulo, descripcion, img1, img2 } = data;
 
+
+
     return (
         <ContenedorSeccion>
             <Subtitulo>{titulo}</Subtitulo>

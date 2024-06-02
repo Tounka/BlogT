@@ -1,12 +1,12 @@
-// CreadorPostUx.jsx
-import { ContenedorFormularioPost, LabelStyled, InputFormulario, SeccionTextareaFormulario, BtnAgregarInput, BtnOnSubmit, MensajeError} from './ComponentesCreadorPost.jsx';
+import { ContenedorFormularioPost, LabelStyled, InputFormulario, SeccionTextareaFormulario, BtnAgregarInput, BtnOnSubmit, MensajeError, InputFile } from './ComponentesCreadorPost.jsx';
 
-export const CreadorPostUx = ({ secciones, agregarSeccion, errores, handleChange, FnTitular, titular }) => {
+export const CreadorPostUx = ({ secciones, agregarSeccion, errores, handleChange, FnTitular, titular, handleMainImageChange }) => {
     return (
         <ContenedorFormularioPost>
             <LabelStyled>Crea tu post</LabelStyled>
             <InputFormulario txt='Titular' name='titular' type='text' FnOnchange={FnTitular} titular={titular} />
-
+            <InputFile name={'imgPrincipal'} onChange={handleMainImageChange} /> {/* Update this line */}
+            
             {secciones.map((seccion, index) => (
                 <SeccionTextareaFormulario 
                     key={index} 

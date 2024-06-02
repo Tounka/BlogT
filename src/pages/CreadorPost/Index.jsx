@@ -4,11 +4,11 @@ import { useDatos } from '../../Contexto.js';
 import { DisplayPrincipal } from '../ComponentesGenericos/Displays.jsx';
 import { CreadorPostUx } from './CreadorPostUx.jsx';
 import { db, storage } from '../../firebase.js';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, Timestamp } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
-import imageCompression  from 'browser-image-compression'; // Importar la función imageCompression de browser-image-compression
+import imageCompression from 'browser-image-compression';
 
 export const CreadorPost = () => {
     const navigate = useNavigate();
@@ -17,23 +17,26 @@ export const CreadorPost = () => {
     const [seccionesValues, setSeccionesValues] = useState([]);
     const [titular, setTitular] = useState('');
     const [datos, setDatos] = useState();
+    const [mainImage, setMainImage] = useState(null); // New state for main image
     const { usuario } = useDatos();
 
     const agregarSeccion = () => {
         setSecciones([...secciones, { name: `titulo_${secciones.length}`, descripcion: `descripcion_${secciones.length}`, img1: `titulo_${secciones.length}_Img1`, img2: `titulo_${secciones.length}_Img2` }]);
     };
-
+    
     useEffect(() => {
-        if (usuario) { // Verifica si el usuario está cargado
+        if (usuario) {
             setDatos({
                 titulo: titular,
                 owner: {
                     userId: usuario.uid,
                     userName: usuario.providerData[0].displayName,
                     userImg: usuario.providerData[0].photoURL,
-                    fechaDeCreacion: new Date() 
-                },secciones: seccionesValues,
+                    fechaDeCreacion: Timestamp.fromDate(new Date()),
+                },
+                secciones: seccionesValues,
             });
+            console.log(usuario);
         }
     }, [titular, usuario, seccionesValues]);
 
@@ -43,15 +46,18 @@ export const CreadorPost = () => {
         setSeccionesValues(newSeccionesValues);
     };
 
+    const handleMainImageChange = (name, file) => {
+        setMainImage(file); // Set the main image file
+    };
+
     const initialValues = {
         titular: '',
     };
 
-    const MAX_FILE_SIZE_MB = 1; // Tamaño máximo en MB permitido
+    const MAX_FILE_SIZE_MB = 1;
 
     const handleSubmit = async (values) => {
         try {
-            // Verifica si el usuario está cargado antes de continuar
             if (!usuario) {
                 console.error("El usuario no está cargado.");
                 return;
@@ -60,37 +66,41 @@ export const CreadorPost = () => {
             const updatedSeccionesValues = await Promise.all(
                 seccionesValues.map(async (seccion) => {
                     const updatedSeccion = { ...seccion };
-    
+
                     for (let imgKey of ['img1', 'img2']) {
                         if (updatedSeccion[imgKey] && updatedSeccion[imgKey] instanceof File) {
-                            const fileSizeMB = updatedSeccion[imgKey].size / (1024 * 1024); // Convertir bytes a megabytes
+                            const fileSizeMB = updatedSeccion[imgKey].size / (1024 * 1024);
+                            const uniqueFileName = uuidv4();
+                            const storageRef = ref(storage, `images/${uniqueFileName}`);
+                            let fileToUpload = updatedSeccion[imgKey];
+
                             if (fileSizeMB > MAX_FILE_SIZE_MB) {
-                                // Comprime la imagen solo si su tamaño es mayor al límite establecido
-                                const compressedImage = await imageCompression(updatedSeccion[imgKey], { maxSizeMB: MAX_FILE_SIZE_MB });
-                                const uniqueFileName = uuidv4(); // Genera un nombre único
-                                const storageRef = ref(storage, `images/${uniqueFileName}`);
-                                const snapshot = await uploadBytes(storageRef, compressedImage);
-                                const downloadURL = await getDownloadURL(snapshot.ref);
-                                updatedSeccion[imgKey] = downloadURL;
-                            } else {
-                                // Si el tamaño del archivo es menor o igual al límite establecido, sube la imagen original
-                                const uniqueFileName = uuidv4(); // Genera un nombre único
-                                const storageRef = ref(storage, `images/${uniqueFileName}`);
-                                const snapshot = await uploadBytes(storageRef, updatedSeccion[imgKey]);
-                                const downloadURL = await getDownloadURL(snapshot.ref);
-                                updatedSeccion[imgKey] = downloadURL;
+                                fileToUpload = await imageCompression(updatedSeccion[imgKey], { maxSizeMB: MAX_FILE_SIZE_MB });
                             }
+
+                            const snapshot = await uploadBytes(storageRef, fileToUpload);
+                            const downloadURL = await getDownloadURL(snapshot.ref);
+                            updatedSeccion[imgKey] = downloadURL;
                         }
                     }
                     return updatedSeccion;
                 })
             );
-    
+
+            let mainImageURL = '';
+            if (mainImage) {
+                const mainImageFileName = uuidv4();
+                const mainImageRef = ref(storage, `images/${mainImageFileName}`);
+                const mainImageSnapshot = await uploadBytes(mainImageRef, mainImage);
+                mainImageURL = await getDownloadURL(mainImageSnapshot.ref);
+            }
+
             const docData = {
                 ...datos,
                 secciones: updatedSeccionesValues,
+                mainImage: mainImageURL, // Add main image URL to the document data
             };
-    
+
             const docRef = await addDoc(collection(db, "post"), docData);
             console.log("Documento guardado con ID: ", docRef.id);
             navigate('/');
@@ -98,7 +108,7 @@ export const CreadorPost = () => {
             console.error("Error al guardar el documento: ", error);
         }
     };
-    
+
     const FnTitular = (event) => {
         const { value } = event.target;
         setTitular(value);
@@ -108,6 +118,10 @@ export const CreadorPost = () => {
         const errors = {};
         if (!titular) {
             errors.titular = 'El titular es requerido';
+        }
+
+        if (!mainImage) {
+            errors.mainImage = 'La imagen principal es requerida';
         }
 
         seccionesValues.forEach((seccion, index) => {
@@ -135,9 +149,11 @@ export const CreadorPost = () => {
                     setSecciones={setSecciones}
                     agregarSeccion={agregarSeccion}
                     handleChange={handleChange}
+                    handleMainImageChange={handleMainImageChange} // Pass the handleMainImageChange function
                     errores={errores}
                     FnTitular={FnTitular}
                     titular={titular}
+                    mainImage={mainImage} // Pass mainImage state to CreadorPostUx
                 />
             </Formik>
         </DisplayPrincipal>

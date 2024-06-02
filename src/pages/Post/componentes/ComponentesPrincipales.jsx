@@ -19,33 +19,56 @@ const ContenedorFooterPostStyled = styled.div`
 `;
 
 const ColumnaImgFooterPost = styled.div`
+    width: 100%;
+    height: 100px;
+    display:flex;
+    
+    justify-content: right;
+`;
+const ContenedorImgFooter = styled.div`
     width: 100px;
     height: 100px;
+    display:flex;
+    
+    justify-content: right;
 `;
 
 const ColumnaInformacionFooterPost = styled.div`
+    margin-left: 20px;
     text-align: left;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
     height: 100px;
 `;
 
 const TextoInformacionFooterPost = styled.div`
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: ${props => props.bold ? 'bold' : '400'};
 `;
 
 // Asegúrate de que img sea una URL de cadena y no un objeto
-export const FooterPost = ({ nombre, img, fechaDeCreacion = 'hoy' }) => {
-    const imagen = img || imgDefault;  // Usar imgDefault si img no está definido
+const formatTimestampToDate = (timestamp) => {
+    if (!timestamp) return '';
+    const date = new Date(timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000);
+    return date.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+};
 
-    console.log(imagen);  // Esto debería mostrar imgDefault si img no está definido
+export const FooterPost = ({ nombre = 'nombre normal', img, fechaDeCreacion }) => {
+    const imagen = img || imgDefault;  // Usar imgDefault si img no está definido
+    const fecha = formatTimestampToDate(fechaDeCreacion);
 
     return (
         <ContenedorFooterPostStyled>
             <ColumnaImgFooterPost>
-                <ImgPicture src={imagen} alt='Foto de usuario' />
+                <ContenedorImgFooter>
+                    <ImgPicture src={imagen} alt='Foto de usuario' />
+                </ContenedorImgFooter>
             </ColumnaImgFooterPost>
             <ColumnaInformacionFooterPost>
+                <TextoInformacionFooterPost bold>Escrito por:</TextoInformacionFooterPost>
                 <TextoInformacionFooterPost>{nombre}</TextoInformacionFooterPost>
-                <TextoInformacionFooterPost>{fechaDeCreacion}</TextoInformacionFooterPost>
+                <TextoInformacionFooterPost>{fecha}</TextoInformacionFooterPost>
             </ColumnaInformacionFooterPost>
         </ContenedorFooterPostStyled>
     );

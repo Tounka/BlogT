@@ -1,22 +1,26 @@
 import { Titulo } from "../componentes/ComponentesPrincipales";
 import { Seccion } from "../componentes/ComponenteSeccion";
 import { FooterPost } from "../componentes/ComponentesPrincipales";
-export const Template = ({data}) =>{
-    const owner = data.owner;
-    const tituloPrincipal = data.titulo;
-    const secciones = data.secciones;
-    console.log(secciones);
+export const Template = ({post}) =>{
+    const owner = post.owner;
+ 
+    const tituloPrincipal = post.titulo;
+    const secciones = post.secciones;
+    const mainImage = post.mainImage;
+
+
+
     return(
         <>
             
-            <Titulo>{tituloPrincipal}</Titulo>
+            <Titulo mainImage={mainImage} >{tituloPrincipal}</Titulo>
             {secciones.map((seccion, index) => (
                 <Seccion  data={seccion} index={index}/>
             )
 
             )}
             <FooterPost nombre={owner.userName} img={owner.userImg} fechaDeCreacion={owner.fechaDeCreacion}/>
-            <h1>{owner}</h1>
+            
             
 
         </>

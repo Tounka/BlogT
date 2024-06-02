@@ -95,7 +95,7 @@ const FieldFileStyled = styled(FieldStyled)`
     }
 `;
 
-const InputFile = ({ name, onChange }) => {
+export const InputFile = ({ name, onChange }) => {
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         onChange(name, file);

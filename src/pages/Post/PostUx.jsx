@@ -1,11 +1,10 @@
 import { Template } from "./templates/TemplatePrincipal";
 
-export const PostUx = ({datosRam}) =>{
-    
-    
+export const PostUx = ({post}) =>{
+
     return(
    
-        <Template data={datosRam} />
+        <Template post={post} />
         
     )
 }
