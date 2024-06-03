@@ -6,7 +6,7 @@ const ContenedorGridPost = styled.div`
 
     display:grid;
     grid-template-columns: 1fr 1fr ;
-    @media (min-width: 1200px) {
+    @media (min-width: 1000px) {
         grid-template-columns: 1fr 1fr 1fr;
     }
     flex-wrap: wrap;

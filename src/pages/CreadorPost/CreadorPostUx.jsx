@@ -1,11 +1,11 @@
 import { ContenedorFormularioPost, LabelStyled, InputFormulario, SeccionTextareaFormulario, BtnAgregarInput, BtnOnSubmit, MensajeError, InputFile } from './ComponentesCreadorPost.jsx';
 
-export const CreadorPostUx = ({ secciones, agregarSeccion, errores, handleChange, FnTitular, titular, handleMainImageChange }) => {
+export const CreadorPostUx = ({ secciones, agregarSeccion, errores, handleChange, FnTitular, titular, handleMainImageChange, isSubmitting, submitAttempted}) => {
     return (
         <ContenedorFormularioPost>
             <LabelStyled>Crea tu post</LabelStyled>
-            <InputFormulario txt='Titular' name='titular' type='text' FnOnchange={FnTitular} titular={titular} />
-            <InputFile name={'imgPrincipal'} onChange={handleMainImageChange} /> {/* Update this line */}
+            <InputFormulario txt='Titular' name='titular' type='text' FnOnchange={FnTitular} titular={titular}  />
+            <InputFile name={'imgPrincipal'} onChange={handleMainImageChange} /> 
             
             {secciones.map((seccion, index) => (
                 <SeccionTextareaFormulario 
@@ -18,8 +18,8 @@ export const CreadorPostUx = ({ secciones, agregarSeccion, errores, handleChange
             ))}
             
             <BtnAgregarInput FnAgregar={agregarSeccion} />
-            <MensajeError errores={errores} />
-            <BtnOnSubmit />
+            <MensajeError errores={ errores} />
+            <BtnOnSubmit isSubmitting={isSubmitting} />
         </ContenedorFormularioPost>
     );
 };

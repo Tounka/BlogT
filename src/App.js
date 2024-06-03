@@ -1,7 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-
 import { UserPage } from './pages/UserPage/Index.jsx';
 import {CreadorPost} from './pages/CreadorPost/Index.jsx'
 import { Login } from './pages/LoginXe/Index.jsx';
@@ -21,6 +20,8 @@ function App() {
             <Route path='Post' element={<Post />} />
           </Routes>
         </BrowserRouter>
+
+        
       </div>
     
 

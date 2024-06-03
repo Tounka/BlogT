@@ -1,7 +1,7 @@
 import { MisPostUx } from "./MisPostUx";
 import { useState, useEffect } from "react";
 import { db } from "../../firebase";
-import { getDocs, collection, query, where } from "firebase/firestore";
+import { getDocs, collection, query, where, orderBy } from "firebase/firestore";
 import { useDatos } from "../../Contexto"; 
 import { DisplayPrincipal } from "../ComponentesGenericos/Displays";
 import { TextoLoadingError } from "./MisPostUx";
@@ -19,7 +19,11 @@ export const MisPost = () => {
             }
 
             try {
-                const q = query(collection(db, "post"), where("owner.userId", "==", usuario.uid));
+                const q = query(
+                    collection(db, "post"),
+                    where("owner.userId", "==", usuario.uid),
+                    orderBy("owner.fechaDeCreacion", "desc") // Ordenar por fecha de creación en orden descendente
+                );
                 const querySnapshot = await getDocs(q);
                 const postList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 setPost(postList);

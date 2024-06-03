@@ -19,6 +19,8 @@ export const ContenedorFormularioPost = styled(Form)`
     position:relative;
     margin: 0 0  100px 0;
     overflow: visible;
+
+    
 `;
 
 export const LabelStyled = styled.h2`
@@ -199,13 +201,14 @@ export const BtnOnSubmitStyled = styled.button`
     user-select: none;
 `;
 
-export const BtnOnSubmit = () => {
+export const BtnOnSubmit = ({ isSubmitting }) => {
     return(
-        <BtnOnSubmitStyled type='submit'>
-            Enviar Post
+        <BtnOnSubmitStyled type='submit' disabled={isSubmitting}>
+            {isSubmitting ? 'Enviando información...' : 'Enviar Post'}
         </BtnOnSubmitStyled>
     );
 };
+
 
 const MensajeErrorStyled = styled.div`
     color: var(--NaranjaPrincipal);

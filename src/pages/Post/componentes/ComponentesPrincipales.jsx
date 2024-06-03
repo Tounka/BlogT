@@ -4,6 +4,8 @@ import imgDefault from '../../../src/imgDefault.png';
 
 export const Titulo = styled.h1`
     font-size: 32px;
+    width: 90%;
+    text-align:center;
     font-weight: bold;
     color: var(--AzulPrincipal);
 `;

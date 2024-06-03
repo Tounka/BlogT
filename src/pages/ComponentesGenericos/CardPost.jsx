@@ -9,13 +9,20 @@ const ContenedorCardPost = styled.div`
     display: flex;
     flex-direction: column;
     cursor: pointer;
+
+    overflow: hidden;
+    border-radius: 20px;
+    border: 2px solid var(--AzulPrincipal);
+    
 `;
 
 const ContenedorImg = styled.div`
-    height: 175px;
+    height: 150px;
     width: 100%;
     overflow: hidden;
 
+    border-bottom: 1px solid var(--AzulPrincipal);
+    box-shadow: inset 0px 5px 17px -5px rgba(0, 0, 0, 0.58);
     img {
         transition: .2s ease-in-out;
         &:hover {
@@ -27,25 +34,34 @@ const ContenedorImg = styled.div`
 
 const ContenedorTextoCard = styled.div`
     width: 100%;
-    height: 75px;
+    height: 100px;
     flex-direction: column;
     font-size: 16px;
+
+    
 `;
 
 const ContenedorTitulo = styled.div`
     font-weight: bold;
     width: 100%;
-    color: var(--AzulPrincipal);
+    color: var(--BlancoV2);
+    background-color: var(--AzulSecundario);
+    text-align:center;
+    padding: 3px ;
 `;
 
 const ContenedorDescripcion = styled.div`
     width: 100%;
-    height: auto;
+    height: calc(100% - 23.2px);
+    text-align: justify;
     overflow: hidden;
-
-    @media (max-width: 900px) {
-        display: none;
-    }
+    background-color: var(--AzulTerciario);
+    color: #ffffff;
+    padding: 4px ;
+    overflow: scroll; /* Mantiene la capacidad de desplazamiento */
+    -ms-overflow-style: none;  /* Oculta la barra de desplazamiento en Internet Explorer y Edge */
+    scrollbar-width: none; 
+  
 `;
 
 export const CardPost = ({ post }) => {

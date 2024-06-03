@@ -3,9 +3,11 @@ import styled from "styled-components";
 const Subtitulo = styled.h2`
     font-size: 24px;
     text-align: center;
+    justify-content:center;
     color: var(--AzulSecundario);
     width: 100%;
     margin: 0;
+    
 `;
 
 const Parrafo = styled.p`
@@ -35,16 +37,16 @@ const ContenedorPt2Seccion = styled.div`
 `;
 
 const ImageContainer = styled.div`
-    width: 100%;
-    max-width: 200px;
     height: auto;
-
-   ${props => props.index % 2 === 0 ? 'float: right; margin-left: 20px;' : 'float: left; margin-right: 20px;'}
+    width: 100%;
+    max-width: ${props => props.imgGrande ? 'auto' : '200px'};
+    ${props => props.index % 2 === 0 ? 'float: right; margin-left: 20px;' : 'float: left; margin-right: 20px;'}
 
 
    
     
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    margin-left: 10px;
     img {
         width: 100%;
         height: auto;
@@ -52,13 +54,13 @@ const ImageContainer = styled.div`
     }
 `;
 
-const ImageComponent = ({ src, alt, index }) => {
+const ImageComponent = ({ src, alt, index, imgGrande }) => {
     return src ? (
-        <ImageContainer index={index}>
+        <ImageContainer index={index} imgGrande={imgGrande}>
             <picture>
                 <source srcSet={`${src}`} type="image/webp" />
                 <source srcSet={`${src}`} type="image/jpeg" />
-                <img src={`${src}`} alt={alt} />
+                <img src={`${src}`} alt={alt} loading="lazy"/>
             </picture>
         </ImageContainer>
     ) : null;
@@ -92,6 +94,7 @@ const ImageComponent2 = ({ src, alt }) => {
 export const Seccion = ({ data, index }) => {
     const { titulo, descripcion, img1, img2 } = data;
 
+    
 
 
     return (
@@ -99,7 +102,7 @@ export const Seccion = ({ data, index }) => {
             <Subtitulo>{titulo}</Subtitulo>
 
             <ContenedorPt1Seccion img={img1} >
-                {img1 && <ImageComponent src={img1} index={index}/>}
+                {img1 && <ImageComponent src={img1} index={index} imgGrande = {descripcion === undefined} />}
                 <Parrafo>{descripcion}</Parrafo>
             </ContenedorPt1Seccion>
 

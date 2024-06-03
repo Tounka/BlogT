@@ -17,13 +17,14 @@ export const CreadorPost = () => {
     const [seccionesValues, setSeccionesValues] = useState([]);
     const [titular, setTitular] = useState('');
     const [datos, setDatos] = useState();
-    const [mainImage, setMainImage] = useState(null); // New state for main image
+    const [mainImage, setMainImage] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const { usuario } = useDatos();
 
     const agregarSeccion = () => {
         setSecciones([...secciones, { name: `titulo_${secciones.length}`, descripcion: `descripcion_${secciones.length}`, img1: `titulo_${secciones.length}_Img1`, img2: `titulo_${secciones.length}_Img2` }]);
     };
-    
+
     useEffect(() => {
         if (usuario) {
             setDatos({
@@ -47,7 +48,7 @@ export const CreadorPost = () => {
     };
 
     const handleMainImageChange = (name, file) => {
-        setMainImage(file); // Set the main image file
+        setMainImage(file); 
     };
 
     const initialValues = {
@@ -55,11 +56,14 @@ export const CreadorPost = () => {
     };
 
     const MAX_FILE_SIZE_MB = 1;
+    const MAX_MAIN_IMAGE_SIZE_MB = 1.5;
 
     const handleSubmit = async (values) => {
+        setIsSubmitting(true);
         try {
             if (!usuario) {
                 console.error("El usuario no está cargado.");
+                setIsSubmitting(false);
                 return;
             }
 
@@ -89,16 +93,23 @@ export const CreadorPost = () => {
 
             let mainImageURL = '';
             if (mainImage) {
+                const mainImageFileSizeMB = mainImage.size / (1024 * 1024);
                 const mainImageFileName = uuidv4();
                 const mainImageRef = ref(storage, `images/${mainImageFileName}`);
-                const mainImageSnapshot = await uploadBytes(mainImageRef, mainImage);
+                let mainImageToUpload = mainImage;
+
+                if (mainImageFileSizeMB > MAX_MAIN_IMAGE_SIZE_MB) {
+                    mainImageToUpload = await imageCompression(mainImage, { maxSizeMB: MAX_MAIN_IMAGE_SIZE_MB });
+                }
+
+                const mainImageSnapshot = await uploadBytes(mainImageRef, mainImageToUpload);
                 mainImageURL = await getDownloadURL(mainImageSnapshot.ref);
             }
 
             const docData = {
                 ...datos,
                 secciones: updatedSeccionesValues,
-                mainImage: mainImageURL, // Add main image URL to the document data
+                mainImage: mainImageURL, 
             };
 
             const docRef = await addDoc(collection(db, "post"), docData);
@@ -106,6 +117,9 @@ export const CreadorPost = () => {
             navigate('/');
         } catch (error) {
             console.error("Error al guardar el documento: ", error);
+        } finally {
+            setIsSubmitting(false);
+            
         }
     };
 
@@ -143,17 +157,20 @@ export const CreadorPost = () => {
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
                 validate={validate}
+                validateOnBlur={false} 
+                validateOnChange={true} 
             >
                 <CreadorPostUx
                     secciones={secciones}
                     setSecciones={setSecciones}
                     agregarSeccion={agregarSeccion}
                     handleChange={handleChange}
-                    handleMainImageChange={handleMainImageChange} // Pass the handleMainImageChange function
+                    handleMainImageChange={handleMainImageChange} 
                     errores={errores}
                     FnTitular={FnTitular}
                     titular={titular}
-                    mainImage={mainImage} // Pass mainImage state to CreadorPostUx
+                    mainImage={mainImage} 
+                    isSubmitting={isSubmitting} 
                 />
             </Formik>
         </DisplayPrincipal>

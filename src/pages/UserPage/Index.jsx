@@ -1,5 +1,6 @@
 import { DisplayPrincipal } from "../ComponentesGenericos/Displays"
-import { GridPost } from "../GridPost/Index"
+import { GridPost } from "../GridPost"
+
 export const UserPage = () => {
 
     

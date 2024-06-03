@@ -10,6 +10,7 @@ const ImageContainer = styled.div`
     height: 100%;
     object-fit: cover;
   }
+  
 `;
 
 export const ImgPicture = ({ src, alt, index, hover}) => {
@@ -19,7 +20,7 @@ export const ImgPicture = ({ src, alt, index, hover}) => {
             <picture>
                 <source srcSet={`${src}`} type="image/webp" />
                 <source srcSet={`${src}`} type="image/jpeg" />
-                <img src={`${src}`} alt={alt} />
+                <img src={`${src}`} alt={alt} loading="lazy"/>
             </picture>
         </ImageContainer>
     ) : null;
