@@ -22,6 +22,10 @@ export const DispayPrincipal = styled.div`
     
     
 `
+export const DisplayLogInRegister = styled(DispayPrincipal)`
+    height:100%;
+    min-width:auto;
+`
 export const ContenedorCLoginRegister = styled.div`
     min-height: 400px;
     max-height: auto;

@@ -56,7 +56,7 @@ const ContenedorDescripcion = styled.div`
     text-align: justify;
     overflow: hidden;
     background-color: var(--AzulTerciario);
-    color: #ffffff;
+    color: var(--AzulPrincipal);
     padding: 4px ;
     overflow: scroll; /* Mantiene la capacidad de desplazamiento */
     -ms-overflow-style: none;  /* Oculta la barra de desplazamiento en Internet Explorer y Edge */

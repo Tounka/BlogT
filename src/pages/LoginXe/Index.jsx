@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {  onAuthStateChanged } from "firebase/auth";
 import { auth } from '../../firebase';
+import { DisplayLogInRegister } from "./ComponentesLoginRegister";
 
 export const Login = () => {
     const [boolSwitchLoginRegister, setBoolSwitchLoginRegister] = useState(0);
@@ -23,11 +24,11 @@ export const Login = () => {
     }, [navigate]);
 
     return (
-        <DispayPrincipal displayNone={true}>
+        <DisplayLogInRegister displayNone={true}>
             {boolSwitchLoginRegister
             ? <RegisterRa  setBoolSwitchLoginRegister={setBoolSwitchLoginRegister}/>
             : <LoginRa setBoolSwitchLoginRegister={setBoolSwitchLoginRegister} />
             }
-        </DispayPrincipal>
+        </DisplayLogInRegister>
     );  
 };

@@ -12,6 +12,7 @@ const DisplayPrincipalStyled = styled.div`
     position: relative;
     z-index: 1;
 `
+
 const ContenedorChildren = styled.div`
     display:flex;
     flex-direction:column;
