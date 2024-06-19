@@ -1,45 +1,69 @@
-import { MisPostUx } from "./MisPostUx";
+import {MisPostUx} from './MisPostUx'
 import { useState, useEffect } from "react";
 import { db } from "../../firebase";
-import { getDocs, collection, query, where, orderBy } from "firebase/firestore";
-import { useDatos } from "../../Contexto"; 
-import { DisplayPrincipal } from "../ComponentesGenericos/Displays";
-import { TextoLoadingError } from "./MisPostUx";
+import { getDocs, collection, orderBy, query, limit, startAfter, where } from "firebase/firestore";
+import { useDatos } from "../../Contexto";
+import { SwitchPagina } from "../ComponentesGenericos/SwitchPagina";
+import { DisplayPrincipal } from '../ComponentesGenericos/Displays';
 
 export const MisPost = () => {
     const [post, setPost] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [lastVisible, setLastVisible] = useState(null);
+    const [noMorePosts, setNoMorePosts] = useState(false);
+    const { indexMisPost, setIndexMisPost } = useDatos();
+    const postsPerPage = 10;
     const { usuario } = useDatos();
 
     useEffect(() => {
         const fetchPosts = async () => {
-            if (!usuario) {
-                setIsLoading(false); 
-                return;
-            }
-
             try {
-                const q = query(
-                    collection(db, "post"),
-                    where("owner.userId", "==", usuario.uid),
-                    orderBy("owner.fechaDeCreacion", "desc") // Ordenar por fecha de creación en orden descendente
-                );
+                let q;
+
+                // Check if we need to start after a specific document
+                if (indexMisPost > 1 && lastVisible) {
+                    q = query(
+                        collection(db, "post"),
+                        where("owner.userId", "==", usuario.uid),
+                        orderBy("owner.fechaDeCreacion", "desc"),
+                        startAfter(lastVisible),
+                        limit(postsPerPage)
+                    );
+                } else {
+                    q = query(
+                        collection(db, "post"),
+                        where("owner.userId", "==", usuario.uid),
+                        orderBy("owner.fechaDeCreacion", "desc"),
+                        limit(postsPerPage)
+                    );
+                }
+
                 const querySnapshot = await getDocs(q);
                 const postList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                
                 setPost(postList);
+
+                // Set the last visible document
+                const lastDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+                setLastVisible(lastDoc);
+
+                // Check if we have received fewer posts than expected
+                if (postList.length < postsPerPage) {
+                    setNoMorePosts(true);
+                } else {
+                    setNoMorePosts(false);
+                }
             } catch (error) {
-                console.error("Error al obtener post ", error);
-            } finally {
-                setIsLoading(false); 
+                console.error("Error al obtener posts", error);
             }
         };
 
         fetchPosts();
-    }, [usuario]); 
+    }, [indexMisPost, usuario]);
 
     return (
         <DisplayPrincipal>
-            {isLoading ? 'Cargando...' : (post.length > 0 ? <MisPostUx arregloPost={post} /> : <TextoLoadingError> Aún no escribes ningún post </TextoLoadingError> )}
+            {post.length > 0 ? <MisPostUx arregloPost={post} /> : 'Cargando...'}
+            <SwitchPagina ultimoPost={noMorePosts} index={indexMisPost} setIndex={setIndexMisPost} />
         </DisplayPrincipal>
     );
 };

@@ -8,7 +8,7 @@ const DisplayPrincipalStyled = styled.div`
     align-items:center;
     height:auto;
     
-    margin-top: 100px;
+    margin-top: 80px;
     position: relative;
     z-index: 1;
 `
@@ -18,7 +18,8 @@ const ContenedorChildren = styled.div`
     flex-direction:column;
     width:100%;
     height:100%;
-    min-height: 80vh;
+    min-height: calc(100vh - 80px);
+    padding-top: 20px;
    z-index: -10;
     align-items:center;
 `

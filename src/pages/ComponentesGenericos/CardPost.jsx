@@ -5,36 +5,47 @@ import { useNavigate } from "react-router-dom";
 
 const ContenedorCardPost = styled.div`
     width: 100%;
-    height: 250px;
+    height: 325px;
     display: flex;
     flex-direction: column;
     cursor: pointer;
 
     overflow: hidden;
     border-radius: 20px;
-    border: 2px solid var(--AzulPrincipal);
     
+    @media (max-width: 600px) {
+        height: 250px;
+    }
 `;
 
 const ContenedorImg = styled.div`
     height: 150px;
     width: 100%;
-    overflow: hidden;
-
-    border-bottom: 1px solid var(--AzulPrincipal);
+    z-index: 10;
+    @media (max-width: 600px) {
+                height: 125PX;
+            }
+    
     box-shadow: inset 0px 5px 17px -5px rgba(0, 0, 0, 0.58);
     img {
+        
         transition: .2s ease-in-out;
+ 
         &:hover {
-            transform: scale(1.08);
+            height: 325px;
+            
             transition: .2s ease-in-out;
+            
+            @media (max-width: 600px) {
+                height: 250px;
+            }
         }
     }
 `;
 
 const ContenedorTextoCard = styled.div`
     width: 100%;
-    height: 100px;
+    height: 200px;
     flex-direction: column;
     font-size: 16px;
 
@@ -48,11 +59,15 @@ const ContenedorTitulo = styled.div`
     background-color: var(--AzulSecundario);
     text-align:center;
     padding: 3px ;
+    
+    @media (max-width: 600px) {
+        font-size: 14px;
+    }
 `;
 
 const ContenedorDescripcion = styled.div`
     width: 100%;
-    height: calc(100% - 23.2px);
+    height: 150px;
     text-align: justify;
     overflow: hidden;
     background-color: var(--AzulTerciario);
@@ -61,6 +76,12 @@ const ContenedorDescripcion = styled.div`
     overflow: scroll; /* Mantiene la capacidad de desplazamiento */
     -ms-overflow-style: none;  /* Oculta la barra de desplazamiento en Internet Explorer y Edge */
     scrollbar-width: none; 
+
+
+    @media (max-width: 600px) {
+        height: 100%;
+        max-height: 100PX;
+    }
   
 `;
 
