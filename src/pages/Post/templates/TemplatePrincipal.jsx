@@ -13,7 +13,7 @@ export const Template = ({post}) =>{
     return(
         <>
             
-            <Titulo mainImage={mainImage} >{tituloPrincipal}</Titulo>
+            <Titulo src={mainImage} titulo={tituloPrincipal} ></Titulo>
             {secciones.map((seccion, index) => (
                 <Seccion  data={seccion} index={index}/>
             )

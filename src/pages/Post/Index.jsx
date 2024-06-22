@@ -7,7 +7,6 @@ export const Post = () => {
     const location = useLocation();
     const { post } = location.state || {}; // Manejar el caso donde el estado podría no estar definido
 
-    console.log('Post component:', location.state); // Log para depurar
 
     return (
         <DisplayPrincipal>

@@ -33,19 +33,19 @@ const ContenedorPt1Seccion = styled.div`
 const ContenedorPt2Seccion = styled.div`
     display: flex;
     width: 100%;
-    height: ${props => (props.img ? '400px' : '20px')};
+    height: ${props => (props.img ? '350px' : '20px')};
 `;
 
 const ImageContainer = styled.div`
     height: auto;
     width: 100%;
-    max-width: ${props => props.imgGrande ? 'auto' : '200px'};
+    max-width: ${props => props.imgGrande ? 'auto' : '300px'};
     ${props => props.index % 2 === 0 ? 'float: right; margin-left: 20px;' : 'float: left; margin-right: 20px;'}
 
 
    
     
-    margin-bottom: 5px;
+    
     margin-left: 10px;
     img {
         width: 100%;

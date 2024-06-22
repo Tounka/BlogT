@@ -2,13 +2,50 @@ import styled from "styled-components";
 import { ImgPicture } from '../../ComponentesGenericos/Img.jsx';
 import imgDefault from '../../../src/imgDefault.png';
 
-export const Titulo = styled.h1`
+export const TituloStyled = styled.h1`
     font-size: 32px;
     width: 90%;
     text-align:center;
     font-weight: bold;
-    color: var(--AzulPrincipal);
+    color: var(--BlancoV2);
+    z-index:100;
 `;
+
+const ContenedorTituloImgStyled = styled.div`
+    width: 85%;
+    height: 600px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background-image: url(${props => props.bgImg});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
+
+    position: relative;
+    &::before{
+        content: '';
+        width:100%;
+        height:100%;
+        position: absolute;
+        
+        background-color: #0000007a;
+    }
+
+    @media (max-width: 800px) {
+        height: 400px;
+    }
+`
+export const Titulo = ({titulo, src}) =>{
+    return(
+        <ContenedorTituloImgStyled bgImg = {src}>
+            <TituloStyled>{titulo}</TituloStyled>
+
+        </ContenedorTituloImgStyled>
+        
+    )
+}
 
 const ContenedorFooterPostStyled = styled.div`
     display: grid;

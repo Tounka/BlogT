@@ -19,16 +19,17 @@ const ContenedorChildren = styled.div`
     width:100%;
     height:100%;
     min-height: calc(100vh - 80px);
-    padding-top: 20px;
+    padding-top: ${props => props.noPaddingTop ? '' : '20px'};
+    gap: 20px;
    z-index: -10;
     align-items:center;
 `
-export const DisplayPrincipal =({children , displayNone})=>{
+export const DisplayPrincipal =({children , displayNone, noPaddingTop})=>{
     return(
         <DisplayPrincipalStyled  >
             <Menu displayNone={displayNone}/>
 
-            <ContenedorChildren > {children}</ContenedorChildren>
+            <ContenedorChildren noPaddingTop={noPaddingTop}> {children}</ContenedorChildren>
 
             <Footer displayNone={displayNone} />
         </DisplayPrincipalStyled>
