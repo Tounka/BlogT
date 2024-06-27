@@ -159,10 +159,15 @@ export const PostPrincipal = () => {
         );
 
         const querySnapshot = await getDocs(q);
-
         if (!querySnapshot.empty) {
-          setPostPrincipal(querySnapshot.docs[0].data());
-        }
+          
+          const id = querySnapshot.docs[0].id;
+          
+          const data = querySnapshot.docs[0].data();
+         
+          setPostPrincipal({ id, ...data });
+      }
+     
       } catch (error) {
         console.error("Error al obtener posts", error);
       }

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ImgPicture } from '../../ComponentesGenericos/Img.jsx';
 import imgDefault from '../../../src/imgDefault.png';
-
+import { BtnEliminarPost } from "../../ComponentesGenericos/Botones";
 export const TituloStyled = styled.h1`
     font-size: 32px;
     width: 90%;
@@ -93,22 +93,28 @@ const formatTimestampToDate = (timestamp) => {
     return date.toISOString().split('T')[0]; // Formato YYYY-MM-DD
 };
 
-export const FooterPost = ({ nombre = 'nombre normal', img, fechaDeCreacion }) => {
+export const FooterPost = ({ nombre = 'nombre normal', img, fechaDeCreacion, idUserPost, id}) => {
     const imagen = img || imgDefault;  // Usar imgDefault si img no está definido
     const fecha = formatTimestampToDate(fechaDeCreacion);
 
     return (
-        <ContenedorFooterPostStyled>
+        <>
+            <ContenedorFooterPostStyled>
             <ColumnaImgFooterPost>
-                <ContenedorImgFooter>
-                    <ImgPicture src={imagen} alt='Foto de usuario' />
-                </ContenedorImgFooter>
-            </ColumnaImgFooterPost>
-            <ColumnaInformacionFooterPost>
-                <TextoInformacionFooterPost bold>Escrito por:</TextoInformacionFooterPost>
-                <TextoInformacionFooterPost>{nombre}</TextoInformacionFooterPost>
-                <TextoInformacionFooterPost>{fecha}</TextoInformacionFooterPost>
-            </ColumnaInformacionFooterPost>
-        </ContenedorFooterPostStyled>
+                    
+                    <ContenedorImgFooter>
+                        <ImgPicture src={imagen} alt='Foto de usuario' />
+                    </ContenedorImgFooter>
+                </ColumnaImgFooterPost>
+                <ColumnaInformacionFooterPost>
+                    <TextoInformacionFooterPost bold>Escrito por:</TextoInformacionFooterPost>
+                    <TextoInformacionFooterPost>{nombre}</TextoInformacionFooterPost>
+                    <TextoInformacionFooterPost>{fecha}</TextoInformacionFooterPost>
+                </ColumnaInformacionFooterPost>
+                
+            </ContenedorFooterPostStyled>
+            <BtnEliminarPost idUserPost={idUserPost} id={id}/>
+        </>
+    
     );
 };

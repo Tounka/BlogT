@@ -23,7 +23,8 @@ export const GridPostUx = ({ arregloPost }) => {
     return (
         <ContenedorGridPost>
             {arregloPost.map(post => (
-                <CardPost key={post.id} post={post} />
+                
+                <CardPost id={post.id} post={post} />
             ))}
             
         </ContenedorGridPost>

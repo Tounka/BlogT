@@ -1,6 +1,7 @@
 import { Titulo } from "../componentes/ComponentesPrincipales";
 import { Seccion } from "../componentes/ComponenteSeccion";
 import { FooterPost } from "../componentes/ComponentesPrincipales";
+
 export const Template = ({post}) =>{
     const owner = post.owner;
  
@@ -8,6 +9,7 @@ export const Template = ({post}) =>{
     const secciones = post.secciones;
     const mainImage = post.mainImage;
 
+    console.log(post);
 
 
     return(
@@ -19,7 +21,7 @@ export const Template = ({post}) =>{
             )
 
             )}
-            <FooterPost nombre={owner.userName} img={owner.userImg} fechaDeCreacion={owner.fechaDeCreacion}/>
+            <FooterPost nombre={owner.userName} img={owner.userImg} fechaDeCreacion={owner.fechaDeCreacion} idUserPost={owner.userId} id={post.id}/>
             
             
 

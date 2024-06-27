@@ -89,11 +89,12 @@ export const CardPost = ({ post }) => {
     const titulo = post.titulo;
     const descripcion = post.secciones[0].descripcion;
     const img = post.mainImage || imgDefault;
-
+    
+   
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/post', { state: { post } });
+        navigate('/post', { state: { post} });
     };
 
     return (
