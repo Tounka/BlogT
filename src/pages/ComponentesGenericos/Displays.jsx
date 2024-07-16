@@ -19,7 +19,10 @@ const ContenedorChildren = styled.div`
     width:100%;
     height:100%;
     min-height: calc(100vh - 80px);
-    padding-top: ${props => props.noPaddingTop ? '' : '20px'};
+    
+    @media (min-width: 1000px ){
+        padding-top: ${props => props.noPaddingTop ? '' : '20px'};
+    }
     gap: 20px;
    z-index: -10;
     align-items:center;

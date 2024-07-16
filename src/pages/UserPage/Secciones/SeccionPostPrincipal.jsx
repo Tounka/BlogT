@@ -88,7 +88,8 @@ const ContenedorUsuario = styled.div`
   @media (max-width: 1000px) {
     display:flex;
     flex-direction: row-reverse;
-    padding: 10px 20px;
+    height: 180px;
+    padding: 10px 10px;
   }
 `;
 
@@ -99,6 +100,7 @@ const ContenedorSeccionTop = styled.div`
   gap: 20px;
   width: 85%;
   height: 600px;
+
   @media (max-width: 1000px) {
     grid-template-columns: 1fr;
     grid-template-rows: 3fr 1fr;
@@ -133,6 +135,9 @@ const ContenedorNombreImg = styled.div`
   align-items: center;
   width: 100%;
   gap: 20px;
+  @media (max-width: 480px) {
+    gap: 0;
+  }
 `;
 
 const ContenedorTextoGenericoSecundario = styled.div`

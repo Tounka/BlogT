@@ -22,9 +22,7 @@ const ContenedorImg = styled.div`
     height: 150px;
     width: 100%;
     z-index: 10;
-    @media (max-width: 600px) {
-                height: 125PX;
-            }
+
     
     box-shadow: inset 0px 5px 17px -5px rgba(0, 0, 0, 0.58);
     img {
@@ -39,8 +37,16 @@ const ContenedorImg = styled.div`
             @media (max-width: 600px) {
                 height: 250px;
             }
+            
         }
     }
+    @media (max-width: 600px) {
+                height: 125PX;
+            }
+    @media (max-width: 400px) {
+        height: 150PX;
+    }
+  
 `;
 
 const ContenedorTextoCard = styled.div`
@@ -49,6 +55,12 @@ const ContenedorTextoCard = styled.div`
     flex-direction: column;
     font-size: 16px;
 
+    @media (max-width: 400px) {
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     
 `;
 
@@ -63,6 +75,13 @@ const ContenedorTitulo = styled.div`
     @media (max-width: 600px) {
         font-size: 14px;
     }
+    @media (max-width: 400px) {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
 `;
 
 const ContenedorDescripcion = styled.div`
@@ -81,6 +100,9 @@ const ContenedorDescripcion = styled.div`
     @media (max-width: 600px) {
         height: 100%;
         max-height: 100PX;
+    }
+    @media (max-width: 400px) {
+        display: none;
     }
   
 `;
