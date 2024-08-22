@@ -215,7 +215,7 @@ const ContenedorBtnSessionGoogle = styled.div`
      cursor: pointer;
 `
 const TextoBtnSessionGoogle = styled.p`
-    color: var(--BlancoSecundario);
+    color: white;
     
 `
 export const BtnSessionGoogle = ({handleClick}) => {

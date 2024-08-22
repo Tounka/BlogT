@@ -22,7 +22,7 @@ const ContenedorImg = styled.div`
     height: 150px;
     width: 100%;
     z-index: 10;
-
+    background-color: white;
     
     box-shadow: inset 0px 5px 17px -5px rgba(0, 0, 0, 0.58);
     img {

@@ -11,6 +11,10 @@ const DisplayPrincipalStyled = styled.div`
     margin-top: 80px;
     position: relative;
     z-index: 1;
+
+    background-color: #e5e5f7;
+
+background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #e5e5f7 10px ), repeating-linear-gradient( #ffffff55, #ffffff );
 `
 
 const ContenedorChildren = styled.div`

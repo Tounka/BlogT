@@ -118,6 +118,7 @@ const ContenedorImg = styled.div`
 const ContenedorImgSubSeccion = styled.div`
   width: 100%;
   height: 100%;
+  max-height: 200px;
   img {
     width: 100%;
     height: 100%;

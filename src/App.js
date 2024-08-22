@@ -1,11 +1,11 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { UserPage } from './pages/UserPage/Index.jsx';
-import {CreadorPost} from './pages/CreadorPost/Index.jsx'
+import { UserPage } from './pages/UserPage/index.jsx';
+import {CreadorPost} from './pages/CreadorPost/index.jsx'
 import { Login } from './pages/LoginXe/index.jsx';
-import { Post } from './pages/Post/Index.jsx';
-import { MisPost } from './pages/MisPost/Index.jsx';
+import { Post } from './pages/Post/index.jsx';
+import { MisPost } from './pages/MisPost/index.jsx';
 
 function App() {
 
