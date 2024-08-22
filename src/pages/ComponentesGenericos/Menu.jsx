@@ -118,7 +118,7 @@ export const Menu = ({ displayNone }) => {
             </ContenedorSeccionesMenu>
             {/* Medio */}
             <ContenedorSeccionesMenuPrincipal>
-                <BtnMenu handleClick={FnNombre} txt={'Perfil'} sty={'textoPeque'} />
+                <BtnMenu handleClick={FnNombre} txt={'Inicio'} sty={'textoPeque'} />
                 <BtnMenu handleClick={FnRedirect} txt={'Crear Post'} sty={'textoPeque'} />
                 <BtnMenu handleClick={FnMisPost} txt={'Mis Post'} sty={'textoPeque'} />
             </ContenedorSeccionesMenuPrincipal>

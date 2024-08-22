@@ -15,7 +15,7 @@ export const Login = () => {
         const unsubscribe = onAuthStateChanged(auth, user => {
             if (user) {
                 // Usuario autenticado, redirigir
-                console.log("Usuario autenticado, UID:", user.uid);
+             
                 navigate('/userPage'); // Cambia '/otra-pagina' por la ruta a la que quieres redirigir
             }
         });

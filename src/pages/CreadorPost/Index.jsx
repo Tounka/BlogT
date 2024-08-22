@@ -37,7 +37,7 @@ export const CreadorPost = () => {
                 },
                 secciones: seccionesValues,
             });
-            console.log(usuario);
+           
         }
     }, [titular, usuario, seccionesValues]);
 
