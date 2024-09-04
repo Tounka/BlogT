@@ -2,7 +2,8 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfi
 import { auth } from '../../firebase.js';
 import { useState } from 'react';
 import { RegisterUx } from "./RegisterUx.jsx";
-
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../../firebase.js";
 export const RegisterRa = ({ setBoolSwitchLoginRegister }) => {
     const [error, setError] = useState(null);
     const initialValues = {
@@ -41,22 +42,31 @@ export const RegisterRa = ({ setBoolSwitchLoginRegister }) => {
         setSubmitting(false);
         try {
             if (values.name && values.lastname && values.email && values.password) {
-                // Crear el usuario en Firebase Authentication
+            
                 const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
                 const user = userCredential.user;
 
-                // Establecer el displayName del usuario
+      
                 await updateProfile(user, {
                     displayName: `${values.name} ${values.lastname}`
                 });
 
-                console.log("Registro exitoso");
+                await addDoc(collection(db, "usuarios"), {
+                    uid: user.uid,
+                    name: values.name,
+                    lastname: values.lastname,
+                    email: values.email,
+                    createdAt: new Date() 
+                });
+
+                console.log("Registro exitoso y usuario agregado a Firestore");
 
             } else {
+      
                 await signInWithEmailAndPassword(auth, values.email, values.password);
                 console.log("Inicio de sesión exitoso");
             }
-            // Redirigir o hacer algo después del inicio de sesión o registro
+            
         } catch (error) {
             // Manejar los errores de registro e inicio de sesión de manera diferente
             if (values.name && values.lastname) {
