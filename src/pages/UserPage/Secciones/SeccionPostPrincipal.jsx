@@ -101,13 +101,14 @@ const ContenedorSeccionTop = styled.div`
   width: 85%;
   height: 600px;
 
+
   @media (max-width: 1000px) {
     grid-template-columns: 1fr;
     grid-template-rows: 3fr 1fr;
     width: 100%;
-
     height: 700px;
   }
+
 `;
 
 const ContenedorImg = styled.div`
@@ -229,7 +230,7 @@ export const PostPrincipal = () => {
           )}
           {!post.secciones[0].img2 && post.secciones[0].descripcion && (
             <ContenedorTextoGenericoSecundario dpNone>
-              <TextoGenerico color='var(--BlancoV2)' size='24px' align='center'>
+              <TextoGenerico color='var(--AzulPrincipal)' size='24px' align='center'>
                 {post.secciones[0].descripcion}
               </TextoGenerico>
             </ContenedorTextoGenericoSecundario>

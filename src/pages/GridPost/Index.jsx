@@ -38,11 +38,11 @@ export const GridPost = () => {
                 
                 setPost(postList);
 
-                // Set the last visible document
+                
                 const lastDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
                 setLastVisible(lastDoc);
 
-                // Check if we have received fewer posts than expected
+               
                 if (postList.length < postsPerPage) {
                     setNoMorePosts(true);
                 } else {

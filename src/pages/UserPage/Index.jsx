@@ -6,7 +6,7 @@ export const UserPage = () => {
 
     
     return(
-        <DisplayPrincipal >
+        <DisplayPrincipal noPadding >
             
             <PostPrincipal />
 
